@@ -22,7 +22,7 @@ getJSON.onclick = () => {
     const request = new XMLHttpRequest()
     request.open('GET', '/1.json')
     request.onreadystatechange = () => {
-        if (request.readyState === 4 && request.status >= 200) {
+        if (request.readyState === 4 && request.status === 200) {
             const object = JSON.parse(request.response) //parse用来解析json代码
             myName.textContent = object.name
 
@@ -30,12 +30,11 @@ getJSON.onclick = () => {
     }
     request.send()
 }
-
 getXML.onclick = () => {
     const request = new XMLHttpRequest()
     request.open('GET', '/1.xml')
     request.onreadystatechange = () => {
-        if (request.readyState === 4 && request.status >= 200) {
+        if (request.readyState === 4 && request.status === 200) {
             const dom = request.responseXML
             const text = dom.getElementsByTagName('warning')[0].textContent
             const div = document.createElement('div')
