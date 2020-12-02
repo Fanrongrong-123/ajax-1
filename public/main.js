@@ -1,21 +1,22 @@
 console.log('我是main')
 let n = 1;
 getPage.onclick = () => {
-    const request = new XMLHttpRequest();
-    request.open("GET", `/page${n + 1}`);
-    request.onreadystatechange = () => {
+    const request = new XMLHttpRequest() //readyState===0
+    request.open("GET", `/page${n + 1}`) //readyState===1
+    request.onreadystatechange = () => { //对应的readyState有四个值 
         if (request.readyState === 4 && request.status === 200) {
-            const array = JSON.parse(request.response);
+            const array = JSON.parse(request.response)
             array.forEach(item => {
-                const li = document.createElement("li");
-                li.textContent = item.id;
-                xxx.appendChild(li);
-            });
+                const li = document.createElement("li")
+                li.textContent = item.id
+                xxx.appendChild(li) //将li插入<ul id="xxx"></ul>
+            })
             n++
         }
-    };
-    request.send();
-};
+    }
+    request.send() //readyState===2
+    //开始下载===3、下载完成===4
+}
 
 getJSON.onclick = () => {
     const request = new XMLHttpRequest()
@@ -39,7 +40,7 @@ getXML.onclick = () => {
             const text = dom.getElementsByTagName('warning')[0].textContent
             const div = document.createElement('div')
             div.innerHTML = text
-            console.log(text.trim())
+            console.log(text.trim()) //清除空格换行
             document.body.appendChild(div)
         }
     }
